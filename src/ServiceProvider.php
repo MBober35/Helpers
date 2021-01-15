@@ -5,7 +5,7 @@ namespace MBober35\Helpers;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider as BaseProvider;
-use MBober35\Helpers\Facades\ActiveRouteManager;
+use MBober35\Helpers\Helpers\ActiveRouteManager;
 
 class ServiceProvider extends BaseProvider
 {
@@ -28,8 +28,6 @@ class ServiceProvider extends BaseProvider
      */
     public function boot()
     {
-        view()->composer('*', function (View $view) {
-            $view->with("currentRoute", Route::currentRouteName());
-        });
+
     }
 }

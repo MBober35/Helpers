@@ -5,7 +5,8 @@ namespace MBober35\Helpers\Facades;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @method static isActive(string $name)
+ * @method static string sliceActive(string $name, bool $trim = false)
+ * @method static string getName()
  *
  * @see ActiveRouteManager
  */

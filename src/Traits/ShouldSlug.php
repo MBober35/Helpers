@@ -46,9 +46,9 @@ trait ShouldSlug {
      */
     public function generateSlug($updating = false)
     {
-        if ($updating && ($this->original["slug"] == $this->slug)) return;
-
         $key = $this->getRouteKeyName();
+
+        if ($updating && ($this->original[$key] == $this->{$key})) return;
 
         $slug = $this->slug ?? $this->{$this->getSlugKey()};
         $slug = Str::slug($slug);

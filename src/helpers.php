@@ -1,10 +1,10 @@
 <?php
 
-if (! function_exists("is_active")) {
+if (! function_exists("active_state")) {
     /**
      * @return \MBober35\Helpers\Facades\ActiveRouteManager
      */
-    function is_active() {
+    function active_state() {
         return app("active-route");
     }
 }
