@@ -50,7 +50,7 @@ trait ShouldSlug {
 
         if ($updating && ($this->original[$key] == $this->{$key})) return;
 
-        $slug = $this->slug ?? $this->{$this->getSlugKey()};
+        $slug = $this->{$key} ?? $this->{$this->getSlugKey()};
         $slug = Str::slug($slug);
         $buf = $slug;
         $i = 1;
