@@ -2,6 +2,8 @@
 
 namespace MBober35\Helpers\Helpers;
 
+use Illuminate\Pagination\LengthAwarePaginator;
+
 class ActiveRouteManager
 {
     protected $currentRoute;
@@ -34,5 +36,19 @@ class ActiveRouteManager
     public function getName()
     {
         return $this->currentName;
+    }
+
+    /**
+     * Порядковый номер элемента в запросе.
+     *
+     * @param LengthAwarePaginator $items
+     * @param int $iteration
+     * @return float|int
+     */
+    public function getItemPager(LengthAwarePaginator $items, int $iteration)
+    {
+        $perPage = $items->perPage();
+        $page = $items->currentPage();
+        return $iteration + $perPage * ($page - 1);
     }
 }
