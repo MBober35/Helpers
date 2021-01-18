@@ -18,13 +18,17 @@ class ActiveRouteManager
     /**
      * Проверить, есть ли в текущем роуте входная строка.
      *
-     * @param string $name
+     * @param mixed $name
      * @param bool $trim
      * @return string
      */
-    public function sliceActive(string $name, bool $trim = false)
+    public function sliceActive($name, bool $trim = false)
     {
-        $isActive = strstr($this->currentName, $name) !== false ? ' active' : '';
+        if (! is_array($name)) $name = [$name];
+        foreach ($name as $item) {
+            $isActive = strstr($this->currentName, $item) !== false ? ' active' : '';
+            if ($isActive) break;
+        }
         return $trim ? trim($isActive) : $isActive;
     }
 
