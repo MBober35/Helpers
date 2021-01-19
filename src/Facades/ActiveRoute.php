@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\Facade;
 
 /**
  * @method static string sliceActive(string $name, bool $trim = false)
- * @method static string getName()
- * @method static int getItemPager(LengthAwarePaginator $items, int $iteration)
+ * @method static string name()
+ * @method static int pager(LengthAwarePaginator $items, int $iteration)
  *
  * @see ActiveRouteManager
  */

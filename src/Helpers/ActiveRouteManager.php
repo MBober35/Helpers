@@ -37,7 +37,7 @@ class ActiveRouteManager
      *
      * @return string|null
      */
-    public function getName()
+    public function name()
     {
         return $this->currentName;
     }
@@ -49,7 +49,7 @@ class ActiveRouteManager
      * @param int $iteration
      * @return float|int
      */
-    public function getItemPager(LengthAwarePaginator $items, int $iteration)
+    public function pager(LengthAwarePaginator $items, int $iteration)
     {
         $perPage = $items->perPage();
         $page = $items->currentPage();
