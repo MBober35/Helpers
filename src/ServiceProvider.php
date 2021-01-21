@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider as BaseProvider;
 use MBober35\Helpers\Commands\HelpersInit;
 use MBober35\Helpers\Helpers\ActiveRouteManager;
+use MBober35\Helpers\Helpers\DateHelperManager;
 
 class ServiceProvider extends BaseProvider
 {
@@ -21,6 +22,9 @@ class ServiceProvider extends BaseProvider
         $this->app->singleton("active-route", function () {
             return new ActiveRouteManager;
         });
+        $this->app->singleton("date-helper", function () {
+            return new DateHelperManager;
+        });
 
         // Commands.
         if ($this->app->runningInConsole()) {
@@ -28,6 +32,11 @@ class ServiceProvider extends BaseProvider
                 HelpersInit::class
             ]);
         }
+
+        // Конфигурация.
+        $this->mergeConfigFrom(
+            __DIR__ . '/config/dates.php', "dates"
+        );
     }
 
     /**
