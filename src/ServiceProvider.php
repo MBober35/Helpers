@@ -11,6 +11,7 @@ use MBober35\Helpers\Commands\HelpersInit;
 use MBober35\Helpers\Helpers\ActiveRouteManager;
 use MBober35\Helpers\Helpers\DateHelperManager;
 use MBober35\Helpers\Rules\ReCaptcha;
+use MBober35\Helpers\View\Components\CheckboxReCaptcha;
 use MBober35\Helpers\View\Components\InvisibleReCaptcha;
 
 class ServiceProvider extends BaseProvider
@@ -63,5 +64,6 @@ class ServiceProvider extends BaseProvider
 
         // Компоненты.
         Blade::component("re-captcha", InvisibleReCaptcha::class);
+        Blade::component("re-captcha-check", CheckboxReCaptcha::class);
     }
 }

@@ -5,7 +5,7 @@
                 "type" => "submit",
                 "id" => ""
             ]) }}>
-    {{ $slot }}
+    {{ $slot ?? "Отправить" }}
 </button>
 @error("g-recaptcha-response")
     <div class="text-danger" role="alert">

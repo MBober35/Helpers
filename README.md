@@ -18,6 +18,14 @@
 
 ### Components
 
+#### x-re-captcha-check
+Вывод Google ReCaptcha Checkbox. В `<head>` должен быть `@stack('js-lib')`
+
+Параметры:
+- `class`: Класс кнопки
+- `id`: Id кнопки
+- `no-script`: Не добавлять скрипт Google Api
+
 #### x-re-captcha
 Вывод кнопки для отправки формы с защитой Google ReCaptcha. В `<head>` должен быть `@stack('js-lib')` 
 
