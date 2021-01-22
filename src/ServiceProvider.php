@@ -3,11 +3,15 @@
 namespace MBober35\Helpers;
 
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider as BaseProvider;
 use MBober35\Helpers\Commands\HelpersInit;
 use MBober35\Helpers\Helpers\ActiveRouteManager;
 use MBober35\Helpers\Helpers\DateHelperManager;
+use MBober35\Helpers\Rules\ReCaptcha;
+use MBober35\Helpers\View\Components\InvisibleReCaptcha;
 
 class ServiceProvider extends BaseProvider
 {
@@ -37,6 +41,9 @@ class ServiceProvider extends BaseProvider
         $this->mergeConfigFrom(
             __DIR__ . '/config/dates.php', "dates"
         );
+        $this->mergeConfigFrom(
+            __DIR__ . "/config/re-captcha.php", "re-captcha"
+        );
     }
 
     /**
@@ -50,5 +57,11 @@ class ServiceProvider extends BaseProvider
         $this->publishes([
             __DIR__ . '/resources/js/components' => resource_path('js/components/Helpers'),
         ], 'public');
+
+        // Подключение шаблонов.
+        $this->loadViewsFrom(__DIR__ . '/resources/views', 'helpers');
+
+        // Компоненты.
+        Blade::component("re-captcha", InvisibleReCaptcha::class);
     }
 }
