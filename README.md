@@ -5,6 +5,11 @@
     php artisan vendor:publish --provider="MBober35\Helpers\ServiceProvider" --tag=public
     php artisan helpers:init
 
+## Variables
+
+- `RE_CAPTCHA_SITE_KEY`
+- `RE_CAPTCHA_SECRET_KEY`
+
 ### Traits
 
 #### CopyStubs
