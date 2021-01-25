@@ -5,6 +5,10 @@
     php artisan vendor:publish --provider="MBober35\Helpers\ServiceProvider" --tag=public
     php artisan helpers:init
 
+## Menu
+
+Расширить конфиг `menu-structure`, по умолчанию в нем есть две переменные `app` и `admin`
+
 ## Variables
 
 - `RE_CAPTCHA_SITE_KEY`
