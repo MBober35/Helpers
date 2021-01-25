@@ -55,4 +55,109 @@ class ActiveRouteManager
         $page = $items->currentPage();
         return $iteration + $perPage * ($page - 1);
     }
+
+    /**
+     * Получить класс для li.
+     *
+     * @param object $item
+     * @param string $begin
+     * @return string
+     */
+    public function getListClass(object $item, string $begin = "")
+    {
+        $class = [];
+        if (! empty($begin)) $class[] = $begin;
+        if ($item->children) $class[] = "dropdown";
+        return implode(" ", $class);
+    }
+
+    /**
+     * Получить класс для ссылки.
+     *
+     * @param object $item
+     * @param $active
+     * @param string $begin
+     * @return string
+     */
+    public function getLinkClass(object $item, $active, string $begin = "")
+    {
+        $class = [];
+        if (! empty($begin)) $class[] = $begin;
+        if ($item->children) $class[] = "dropdown-toggle";
+        if ($item->class) $class[] = $item->class;
+        if ($active) $class[] = "active";
+        return implode(" ", $class);
+    }
+
+    /**
+     * Активная ссылка.
+     *
+     * @param object $item
+     * @return bool
+     */
+    public function getActive(object $item)
+    {
+        if (! $item->route && empty($item->children)) return false;
+        if ($item->single) return $this->name() === $item->route;
+        return $this->makeSubRoutes($item);
+    }
+
+    /**
+     * Проверить условие активации ссылки на подстраницах.
+     *
+     * @param object $item
+     * @return bool
+     */
+    protected function makeSubRoutes(object $item)
+    {
+        $current = $this->splitRoute($this->name());
+        $activeRoutes = $this->getChildrenRoutes($item);
+        $disabledRoutes = [];
+        foreach ($item->active as $route) {
+            $result = $this->splitRoute($route);
+            if (strripos($result, "!") === 0) {
+                $disabledRoutes[] = str_replace("!", "", $result);
+            }
+            else {
+                $activeRoutes[] = $result;
+            }
+        }
+        if (in_array($current, $disabledRoutes)) return false;
+        return in_array($current, $activeRoutes);
+    }
+
+    /**
+     * Дочернии пути.
+     *
+     * @param $item
+     */
+    protected function getChildrenRoutes($item)
+    {
+        $activeRoutes = [];
+        foreach ($item->children as $child) {
+            if (! $child->route) continue;
+            $activeRoutes[] = $this->splitRoute($child->route);
+        }
+        if ($item->route) {
+            $activeRoutes[] = $this->splitRoute($item->route);
+        }
+        return array_unique($activeRoutes);
+    }
+
+    /**
+     * Разбить путь.
+     *
+     * @param $route
+     * @return string
+     */
+    protected function splitRoute($route)
+    {
+        $exploded = explode(".", $route);
+        if (count($exploded) == 1) return $route;
+        $str = [];
+        for ($i = 0; $i < count($exploded) - 1; $i++) {
+            $str[] = $exploded[$i];
+        }
+        return implode(".", $str);
+    }
 }

@@ -8,11 +8,14 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider as BaseProvider;
 use MBober35\Helpers\Commands\HelpersInit;
+use MBober35\Helpers\Facades\MenuStructure;
 use MBober35\Helpers\Helpers\ActiveRouteManager;
 use MBober35\Helpers\Helpers\DateHelperManager;
+use MBober35\Helpers\Helpers\MenuStructureManager;
 use MBober35\Helpers\Rules\ReCaptcha;
 use MBober35\Helpers\View\Components\CheckboxReCaptcha;
 use MBober35\Helpers\View\Components\InvisibleReCaptcha;
+use MBober35\Helpers\View\Components\NavList;
 
 class ServiceProvider extends BaseProvider
 {
@@ -30,6 +33,9 @@ class ServiceProvider extends BaseProvider
         $this->app->singleton("date-helper", function () {
             return new DateHelperManager;
         });
+        $this->app->singleton("menu-structure", function () {
+            return new MenuStructureManager;
+        });
 
         // Commands.
         if ($this->app->runningInConsole()) {
@@ -39,12 +45,7 @@ class ServiceProvider extends BaseProvider
         }
 
         // Конфигурация.
-        $this->mergeConfigFrom(
-            __DIR__ . '/config/dates.php', "dates"
-        );
-        $this->mergeConfigFrom(
-            __DIR__ . "/config/re-captcha.php", "re-captcha"
-        );
+        $this->addConfigs();
     }
 
     /**
@@ -62,8 +63,46 @@ class ServiceProvider extends BaseProvider
         // Подключение шаблонов.
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'helpers');
 
+        // Расширить Blade.
+        $this->extendBlade();
+    }
+
+    /**
+     * Добавить компоненты и переменные.
+     */
+    protected function extendBlade()
+    {
         // Компоненты.
         Blade::component("re-captcha", InvisibleReCaptcha::class);
         Blade::component("re-captcha-check", CheckboxReCaptcha::class);
+        Blade::component("nav-list", NavList::class);
+
+        // Переменные в Blade
+        if (config("menu-structure.adminLeftMenu")) {
+            view()->composer("layouts.admin", function (View $view) {
+                $view->with("leftMenu", "helpers::includes.admin-menu");
+            });
+        }
+        if (config("menu-structure.appLeftMenu")) {
+            view()->composer("layouts.app", function (View $view) {
+                $view->with("leftMenu", "helpers::includes.app-menu");
+            });
+        }
+    }
+
+    /**
+     * Добавить конфиги.
+     */
+    protected function addConfigs()
+    {
+        $this->mergeConfigFrom(
+            __DIR__ . '/config/dates.php', "dates"
+        );
+        $this->mergeConfigFrom(
+            __DIR__ . "/config/re-captcha.php", "re-captcha"
+        );
+        $this->mergeConfigFrom(
+            __DIR__ . "/config/menu-structure.php", "menu-structure"
+        );
     }
 }

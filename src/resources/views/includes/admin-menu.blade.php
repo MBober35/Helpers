@@ -1,0 +1,1 @@
+<x-nav-list key="admin"></x-nav-list>

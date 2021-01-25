@@ -1,0 +1,1 @@
+<x-nav-list key="app"></x-nav-list>
