@@ -14,20 +14,20 @@
 - `RE_CAPTCHA_SITE_KEY`
 - `RE_CAPTCHA_SECRET_KEY`
 
-### Traits
+## Traits
 
-#### CopyStubs
+### CopyStubs
 Трейт для пакетов, позволяет копировать файлы `.stub` в приложение. Нужно указать абсолютный путь откуда копировать и путь в приложении куда копировать.
 
-#### ShouldSlug
+### ShouldSlug
 Трейт генерирует slug для модели. По умолчанию поле `slug` на основе `title`
 
-#### CopyVue
+### CopyVue
 Трейт для пакетов, позволяет подключить `vue` файлы после их публикации.
 
-### Components
+## Components
 
-#### x-re-captcha-check
+### x-re-captcha-check
 Вывод Google ReCaptcha Checkbox. В `<head>` должен быть `@stack('js-lib')`
 
 Параметры:
@@ -35,7 +35,7 @@
 - `id`: Id кнопки
 - `no-script`: Не добавлять скрипт Google Api
 
-#### x-re-captcha
+### x-re-captcha
 Вывод кнопки для отправки формы с защитой Google ReCaptcha. В `<head>` должен быть `@stack('js-lib')` 
 
 Параметры:
@@ -46,7 +46,7 @@
 - `id`: Id кнопки
 - `no-script`: Не добавлять скрипт Google Api
 
-### Validation
+## Validation
 
-#### ReCaptcha
+### ReCaptcha
 Валидация Google ReCaptcha
