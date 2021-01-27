@@ -3,7 +3,7 @@
         template
     @elseif ($menuItem->url)
         @if ($gate = $menuItem->gate)
-            @can($gate)
+            @can($gate, $menuItem->gateParam)
                 <li class="{{ active_state()->getListClass($menuItem, "nav-item") }}">
                     @include("helpers::includes.nav-link", ["link" => $menuItem, "begin" => "nav-link", "active" => active_state()->getActive($menuItem)])
                 </li>
