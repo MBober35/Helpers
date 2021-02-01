@@ -1,0 +1,1 @@
+<x-nav-list key="admin" blade="kit-nav-list"></x-nav-list>

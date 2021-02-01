@@ -90,6 +90,7 @@ class MenuStructureManager
         $this->setDefaultProp("single");
         $this->setDefaultProp("target");
         $this->setDefaultProp("ico");
+        $this->setDefaultProp("feather");
     }
 
     /**

@@ -72,6 +72,21 @@ class ActiveRouteManager
     }
 
     /**
+     * Получить класс для li.
+     *
+     * @param object $item
+     * @param string $begin
+     * @return string
+     */
+    public function getKitListClass(object $item, string $begin = "")
+    {
+        $class = [];
+        if (! empty($begin)) $class[] = $begin;
+        if ($this->getActive($item)) $class[] = "active";
+        return implode(" ", $class);
+    }
+
+    /**
      * Получить класс для ссылки.
      *
      * @param object $item
@@ -86,6 +101,22 @@ class ActiveRouteManager
         if ($item->children) $class[] = "dropdown-toggle";
         if ($item->class) $class[] = $item->class;
         if ($active) $class[] = "active";
+        return implode(" ", $class);
+    }
+
+    /**
+     * Получить класс для ссылки.
+     *
+     * @param object $item
+     * @param string $begin
+     * @return string
+     */
+    public function getKitLinkClass(object $item, string $begin = "")
+    {
+        $class = [];
+        if (! empty($begin)) $class[] = $begin;
+        if ($item->children) $class[] = "collapsed";
+        if ($item->class) $class[] = $item->class;
         return implode(" ", $class);
     }
 

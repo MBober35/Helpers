@@ -15,6 +15,13 @@ class NavList extends Component
     public $key;
 
     /**
+     * Template
+     *
+     * @var string
+     */
+    public $blade;
+
+    /**
      * Menu sturcture.
      *
      * @var array
@@ -27,10 +34,16 @@ class NavList extends Component
      * InvisibleReCaptcha constructor.
      * @param string $callback
      */
-    public function __construct($key)
+    public function __construct($key, $blade = "nav-list")
     {
         $this->key = $key;
         $this->structure = MenuStructure::getStructureByKey($key);
+        if (in_array($blade, ["nav-list", "kit-nav-list"])) {
+            $this->blade = $blade;
+        }
+        else {
+            $this->blade = "nav-list";
+        }
     }
 
     /**
@@ -40,6 +53,6 @@ class NavList extends Component
      */
     public function render()
     {
-        return view('helpers::components.nav-list');
+        return view("helpers::components.{$this->blade}");
     }
 }
