@@ -1,6 +1,6 @@
 @foreach($structure as $menuItem)
     @if ($menuItem->template)
-        template
+        @includeIf($menuItem->template)
     @elseif ($menuItem->url)
         @if ($gate = $menuItem->gate)
             @can($gate, $menuItem->gateParam)

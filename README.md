@@ -1,5 +1,9 @@
 # Helpers
 
+Для управления сайтом можно скачать и добавить тему [AdminKit](https://github.com/adminkit/adminkit), под нее созданы шаблоны `adminkit`
+
+В js прописаны ссылки на тему, что бы не использховать ее, нужно почистить созданные js и scss, которые относятся к теме, и webpack
+
 ## Install
 
     php artisan vendor:publish --provider="MBober35\Helpers\ServiceProvider" --tag=public
