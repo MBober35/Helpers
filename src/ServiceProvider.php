@@ -80,12 +80,12 @@ class ServiceProvider extends BaseProvider
         // Переменные в Blade
         if (config("menu-structure.adminLeftMenu")) {
             view()->composer("layouts.admin", function (View $view) {
-                $view->with("leftMenu", "helpers::includes.admin-menu");
+                $view->with("leftMenu", config("menu-structure.adminLeftMenu"));
             });
         }
         if (config("menu-structure.appLeftMenu")) {
             view()->composer("layouts.app", function (View $view) {
-                $view->with("leftMenu", "helpers::includes.app-menu");
+                $view->with("leftMenu", config("menu-structure.appLeftMenu"));
             });
         }
     }
