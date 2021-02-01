@@ -88,11 +88,6 @@ class ServiceProvider extends BaseProvider
                 $view->with("leftMenu", "helpers::includes.app-menu");
             });
         }
-        if (config("menu-structure.adminkitLeftMenu")) {
-            view()->composer("layouts.adminkit", function (View $view) {
-                $view->with("leftMenu", "helpers::includes.adminkit-menu");
-            });
-        }
     }
 
     /**
