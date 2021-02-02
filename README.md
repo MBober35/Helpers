@@ -48,6 +48,23 @@
 - `id`: Id кнопки
 - `no-script`: Не добавлять скрипт Google Api
 
+### x-table-priority
+Вывод списка элементов для смены приоритета вывода
+
+Параметры:
+- `table`: таблица в которой необходимо изменить приоритет
+- `field`(priority): поле которое отвечает за приоритет
+- `elements`: массив элементов
+
+Элемент:
+- `name`: Заголовок
+- `id`: Id
+- `url`(не обязательно): если указан, заголовок будет ссылкой
+
+Пример:
+    
+    <x-table-priority table="users" :elements="$users"></x-table-priority>
+
 ## Validation
 
 ### ReCaptcha

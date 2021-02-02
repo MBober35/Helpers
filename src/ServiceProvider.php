@@ -16,6 +16,7 @@ use MBober35\Helpers\Rules\ReCaptcha;
 use MBober35\Helpers\View\Components\CheckboxReCaptcha;
 use MBober35\Helpers\View\Components\InvisibleReCaptcha;
 use MBober35\Helpers\View\Components\NavList;
+use MBober35\Helpers\View\Components\UniversalPriority;
 
 class ServiceProvider extends BaseProvider
 {
@@ -65,6 +66,9 @@ class ServiceProvider extends BaseProvider
 
         // Расширить Blade.
         $this->extendBlade();
+
+        // Пути.
+        $this->loadRoutesFrom(__DIR__ . "/routes/priority.php");
     }
 
     /**
@@ -76,6 +80,7 @@ class ServiceProvider extends BaseProvider
         Blade::component("re-captcha", InvisibleReCaptcha::class);
         Blade::component("re-captcha-check", CheckboxReCaptcha::class);
         Blade::component("nav-list", NavList::class);
+        Blade::component("table-priority", UniversalPriority::class);
 
         // Переменные в Blade
         if (config("menu-structure.adminLeftMenu")) {

@@ -26,6 +26,7 @@ class HelpersInit extends Command
     protected $vueIncludes = [
         "admin" => [
             "confirm-form" => "ConfirmForm",
+            "universal-priority" => "UniversalPriority",
         ],
     ];
 
