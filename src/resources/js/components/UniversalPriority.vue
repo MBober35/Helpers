@@ -4,7 +4,7 @@
       <div class="alert alert-danger" role="alert" v-if="Object.keys(errors).length">
         <template v-for="field in errors">
           <template v-for="error in field">
-            <span>{{ error }}</span>
+            <div class="alert-message">{{ error }}</div>
             <br>
           </template>
         </template>
