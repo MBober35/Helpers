@@ -85,7 +85,6 @@ class MenuStructureManager
         $this->setDefaultProp("gateParam");
         $this->setDefaultProp("children", []);
         $this->setDefaultProp("class");
-        $this->setDefaultProp("class");
         $this->setDefaultProp("active", []);
         $this->setDefaultProp("single");
         $this->setDefaultProp("target");

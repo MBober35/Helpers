@@ -141,19 +141,28 @@ class ActiveRouteManager
      */
     protected function makeSubRoutes(object $item)
     {
-        $current = $this->splitRoute($this->name());
+        $fullName = $this->name();
+        $current = $this->splitRoute($fullName);
         $activeRoutes = $this->getChildrenRoutes($item);
         $disabledRoutes = [];
         foreach ($item->active as $route) {
-            $result = $this->splitRoute($route);
-            if (strripos($result, "!") === 0) {
+            if (strripos($route, "!") === 0) {
+                if (strripos($route, "*") !== false) {
+                    $result = $this->splitRoute($route);
+                } else {
+                    $result = $route;
+                }
                 $disabledRoutes[] = str_replace("!", "", $result);
             }
             else {
+                $result = $this->splitRoute($route);
                 $activeRoutes[] = $result;
             }
         }
-        if (in_array($current, $disabledRoutes)) return false;
+        if (
+            in_array($current, $disabledRoutes) ||
+            in_array($fullName, $disabledRoutes)
+        ) return false;
         return in_array($current, $activeRoutes);
     }
 
