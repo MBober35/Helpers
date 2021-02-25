@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
+use MBober35\Helpers\Events\PriorityChanged;
 use MBober35\Helpers\Exceptions\PreventActionException;
 
 class PriorityController extends Controller
@@ -34,7 +35,7 @@ class PriorityController extends Controller
                     "$field" => $priority
                 ]);
         }
-        // TODO: make event
+        PriorityChanged::dispatch($table, $ids);
         return response()
             ->json([
                 "success" => true,
