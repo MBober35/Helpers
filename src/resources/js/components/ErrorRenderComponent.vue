@@ -1,11 +1,19 @@
 <template>
-  <div class="alert alert-danger" role="alert" v-if="Object.keys(errors).length">
-    <template v-for="field in errors">
-      <template v-for="error in field">
-        <div :class="! simple ? 'alert-message' : ''">{{ error }}</div>
-        <br v-if="! simple">
+  <div className="alert alert-danger" role="alert" v-if="Object.keys(errors).length">
+    <template v-if="simple">
+      <template v-for="field in errors">
+        <template v-for="error in field">
+          <div>{{ error }}</div>
+        </template>
       </template>
     </template>
+    <div className="alert-message" v-else>
+      <template v-for="field in errors">
+        <template v-for="error in field">
+          <div>{{ error }}</div>
+        </template>
+      </template>
+    </div>
   </div>
 </template>
 
